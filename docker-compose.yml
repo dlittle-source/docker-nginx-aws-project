@@ -1,0 +1,9 @@
+services:
+  web:
+    image: project2-nginx-app
+    container_name: project2-container
+
+    ports:
+      - "8080:80"
+
+    restart: always
