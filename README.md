@@ -175,18 +175,18 @@ A Git rebase conflict occurred during deployment workflow updates.
 
 This strengthened understanding of:
 
-Git workflows
+- Git workflows
 source control conflict resolution
 deployment synchronization
 Reverse Proxy Troubleshooting
 
-Nginx configuration validation:
+- Nginx configuration validation:
 
-sudo nginx -t
+- sudo nginx -t
 
 Traffic flow testing:
 
-curl http://localhost
+- curl http://localhost
 curl http://localhost:8080
 Security Validation
 
