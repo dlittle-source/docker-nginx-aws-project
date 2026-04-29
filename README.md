@@ -15,17 +15,6 @@ The application is containerized using Docker and deployed on an AWS EC2 Ubuntu 
 This project was designed to simulate real-world DevOps deployment practices while maintaining a clean and interview-friendly architecture.
 
 ## Architecture
-Internet Traffic
-       ↓
-AWS EC2 Public IP :80
-       ↓
-Nginx Reverse Proxy
-       ↓
-localhost:8080
-       ↓
-Docker Compose Managed Container
-       ↓
-Nginx Web Application
 
 <p align="center">
   <img src="images/project2-architecture.png" width="700">
@@ -100,6 +89,8 @@ server {
     }
 }
 
+---
+
 ## Docker Compose Configuration
 
 Docker Compose was used to simplify deployment orchestration and container lifecycle management.
@@ -130,18 +121,6 @@ services:
 
 This project uses a Git-based deployment workflow.
 
-Windows Workstation
-        ↓
-Git Commit
-        ↓
-GitHub Push
-        ↓
-SSH into EC2
-        ↓
-git pull origin main
-        ↓
-./deploy.sh
-
 <p align="center">
   <img src="images/project2-deployment-workflow.png" width="700">
 </p>
@@ -150,17 +129,17 @@ git pull origin main
 
 A deployment script was created to simplify deployments and ensure consistency.
 
-#!/bin/bash
-set -e
+- #!/bin/bash
+- set -e
 
-echo "Starting Project 2 deployment..."
+- echo "Starting Project 2 deployment..."
 
-git pull origin main
+- git pull origin main
 
-docker-compose down
-docker-compose up -d --build
+- docker-compose down
+- docker-compose up -d --build
 
-docker-compose ps
+- docker-compose ps
 
 echo "Deployment complete."
 What This Script Does
@@ -171,11 +150,11 @@ validates deployment status
 
 ## Health Validation
 
-Container health checks were implemented using Docker Compose.
+- Container health checks were implemented using Docker Compose.
 
-This improves deployment reliability and validates that the application inside the container is functioning properly.
+- This improves deployment reliability and validates that the application inside the container is functioning properly.
 
-healthcheck:
+- healthcheck:
   test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
   interval: 30s
   timeout: 10s
@@ -187,10 +166,10 @@ healthcheck:
 
 A Git rebase conflict occurred during deployment workflow updates.
 
-Resolution Process
-identified conflicting files
-manually resolved conflicts
-completed Git rebase workflow
+- Resolution Process
+- identified conflicting files
+- manually resolved conflicts
+- completed Git rebase workflow
 
 This strengthened understanding of:
 
