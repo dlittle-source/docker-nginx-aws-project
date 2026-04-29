@@ -73,7 +73,7 @@ External traffic can only access the application through the reverse proxy layer
 ## Nginx Reverse Proxy Configuration
 
 Nginx was configured to listen on port 80 and forward traffic to the Docker container running internally on port 8080.
-
+```nginx
 server {
     listen 80;
     server_name _;
@@ -88,6 +88,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
+```
 
 ---
 
@@ -141,7 +142,8 @@ A deployment script was created to simplify deployments and ensure consistency.
 
 - docker-compose ps
 
-echo "Deployment complete."
+- echo "Deployment complete."
+
 What This Script Does
 pulls latest code changes
 rebuilds Docker image
