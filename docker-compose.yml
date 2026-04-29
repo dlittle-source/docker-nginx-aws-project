@@ -1,5 +1,6 @@
 services:
   web:
+    build: .
     image: project2-nginx-app
     container_name: project2-container
 

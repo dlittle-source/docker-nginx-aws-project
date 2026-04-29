@@ -1,21 +1,13 @@
 #!/bin/bash
+set -e
 
 echo "Starting Project 2 deployment..."
 
+git pull origin main
+
 docker-compose down
+docker-compose up -d --build
 
-docker build -t project2-nginx-app .
+docker-compose ps
 
-docker-compose up -d
-
-echo "Waiting for container health check..."
-
-sleep 10
-
-docker ps
-
-if docker ps | grep -q "(healthy)"; then
-    echo "Deployment successful. Container is healthy."
-else
-    echo "Deployment warning: container health check not confirmed."
-fi
+echo "Deployment complete."
