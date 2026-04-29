@@ -1,20 +1,46 @@
-# Project 2 — Dockerized Web Application Deployment with Nginx Reverse Proxy on AWS
+# 🚀 Project 2 — Dockerized Web Application Deployment with Nginx Reverse Proxy on AWS
 
-## Project Overview
+![AWS](https://img.shields.io/badge/AWS-EC2-orange?style=for-the-badge\&logo=amazonaws)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=for-the-badge\&logo=docker)
+![Nginx](https://img.shields.io/badge/Nginx-Reverse%20Proxy-green?style=for-the-badge\&logo=nginx)
+![Linux](https://img.shields.io/badge/Linux-Ubuntu-black?style=for-the-badge\&logo=linux)
+![Docker Compose](https://img.shields.io/badge/Docker-Compose-blue?style=for-the-badge\&logo=docker)
 
-This project demonstrates a production-inspired deployment architecture using:
+---
 
-- Docker
-- Docker Compose
-- Nginx Reverse Proxy
-- AWS EC2
-- Linux Server Administration
+# 📌 Project Overview
 
-The application is containerized using Docker and deployed on an AWS EC2 Ubuntu server. Nginx is configured as a reverse proxy to securely route public HTTP traffic to the internal Docker container.
+This project demonstrates a **production-inspired deployment architecture** using:
 
-This project was designed to simulate real-world DevOps deployment practices while maintaining a clean and interview-friendly architecture.
+* **Docker**
+* **Docker Compose**
+* **Nginx Reverse Proxy**
+* **AWS EC2**
+* **Linux Server Administration**
 
-## Architecture
+The application is containerized using Docker and deployed on an AWS EC2 Ubuntu server.
+
+Nginx is configured as a **reverse proxy** to securely route public HTTP traffic to the internal Docker container.
+
+This project was designed to simulate **real-world DevOps deployment practices** while maintaining a clean and interview-friendly architecture.
+
+---
+
+# 🏗️ Architecture
+
+```text
+Internet Traffic
+       ↓
+AWS EC2 Public IP :80
+       ↓
+Nginx Reverse Proxy
+       ↓
+localhost:8080
+       ↓
+Docker Compose Managed Container
+       ↓
+Nginx Web Application
+```
 
 <p align="center">
   <img src="images/project2-architecture.png" width="700">
@@ -22,18 +48,22 @@ This project was designed to simulate real-world DevOps deployment practices whi
 
 ---
 
-## Technologies Used
-Technology	    Purpose
-AWS EC2	        Cloud hosting environment
-Ubuntu Linux	Server operating system
-Docker	        Containerization platform
-Docker-Compose	Container orchestration
-Nginx	        Reverse proxy and web server
-Git	            Version control
-GitHub	        Source control repository
-Bash	        Deployment automation scripting
+# ⚙️ Technologies Used
 
-## Key Features
+| Technology         | Purpose                         |
+| ------------------ | ------------------------------- |
+| **AWS EC2**        | Cloud hosting environment       |
+| **Ubuntu Linux**   | Server operating system         |
+| **Docker**         | Containerization platform       |
+| **Docker Compose** | Container orchestration         |
+| **Nginx**          | Reverse proxy and web server    |
+| **Git**            | Version control                 |
+| **GitHub**         | Source control repository       |
+| **Bash**           | Deployment automation scripting |
+
+---
+
+# 🔥 Key Features
 
 ✅ Dockerized web application deployment
 
@@ -53,7 +83,9 @@ Bash	        Deployment automation scripting
 
 ✅ AWS Security Group hardening
 
-## Infrastructure Security Improvements
+---
+
+# 🔒 Infrastructure Security Improvements
 
 One of the major security improvements implemented in this project was restricting direct access to the Docker container.
 
@@ -61,18 +93,26 @@ One of the major security improvements implemented in this project was restricti
 
 The container was publicly accessible through:
 
+```text
 Port 8080
-Security Improvements Implemented
-Configured Nginx as the public entry point on port 80
-Restricted container communication to localhost:8080
-Removed public access to port 8080 from the AWS Security Group
-Result
+```
+
+## Security Improvements Implemented
+
+* Configured **Nginx** as the public entry point on **port 80**
+* Restricted container communication to **localhost:8080**
+* Removed public access to **port 8080** from the AWS Security Group
+
+## Result
 
 External traffic can only access the application through the reverse proxy layer.
 
-## Nginx Reverse Proxy Configuration
+---
 
-Nginx was configured to listen on port 80 and forward traffic to the Docker container running internally on port 8080.
+# 🌐 Nginx Reverse Proxy Configuration
+
+Nginx was configured to listen on **port 80** and forward traffic to the Docker container running internally on **port 8080**.
+
 ```nginx
 server {
     listen 80;
@@ -90,17 +130,24 @@ server {
 }
 ```
 
+<p align="center">
+  <img src="images/screenshots/nginx-reverse-proxy-config.png" width="850">
+</p>
+
 ---
 
-## Docker Compose Configuration
+# 🐳 Docker Compose Configuration
 
 Docker Compose was used to simplify deployment orchestration and container lifecycle management.
 
-Features Implemented
-automatic container restart policies
-container health checks
-simplified deployment management
-consistent rebuild workflow
+## Features Implemented
+
+* automatic container restart policies
+* container health checks
+* simplified deployment management
+* consistent rebuild workflow
+
+```yaml
 services:
   web:
     build: .
@@ -117,109 +164,160 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+```
 
-## Deployment Workflow
+<p align="center">
+  <img src="images/screenshots/docker-compose-config.png" width="850">
+</p>
 
-This project uses a Git-based deployment workflow.
+---
+
+# 🚀 Deployment Workflow
+
+This project uses a **Git-based deployment workflow**.
+
+```text
+Windows Workstation
+        ↓
+Git Commit
+        ↓
+GitHub Push
+        ↓
+SSH into EC2
+        ↓
+git pull origin main
+        ↓
+./deploy.sh
+```
 
 <p align="center">
   <img src="images/project2-deployment-workflow.png" width="700">
 </p>
 
-## Deployment Automation Script
+---
+
+# 🤖 Deployment Automation Script
 
 A deployment script was created to simplify deployments and ensure consistency.
 
-- #!/bin/bash
-- set -e
+```bash
+#!/bin/bash
+set -e
 
-- echo "Starting Project 2 deployment..."
+echo "Starting Project 2 deployment..."
 
-- git pull origin main
+git pull origin main
 
-- docker-compose down
-- docker-compose up -d --build
+docker-compose down
+docker-compose up -d --build
 
-- docker-compose ps
+docker-compose ps
 
-- echo "Deployment complete."
+echo "Deployment complete."
+```
 
-What This Script Does
-pulls latest code changes
-rebuilds Docker image
-recreates containers
-validates deployment status
+## What This Script Does
 
-## Health Validation
+* pulls latest code changes
+* rebuilds Docker image
+* recreates containers
+* validates deployment status
 
-- Container health checks were implemented using Docker Compose.
+<p align="center">
+  <img src="images/screenshots/deploy-script.png" width="850">
+</p>
 
-- This improves deployment reliability and validates that the application inside the container is functioning properly.
+---
 
-- healthcheck:
+# ❤️ Health Validation
+
+Container health checks were implemented using Docker Compose.
+
+This improves deployment reliability and validates that the application inside the container is functioning properly.
+
+```yaml
+healthcheck:
   test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
   interval: 30s
   timeout: 10s
   retries: 3
+```
 
-## Challenges and Troubleshooting
+---
 
-# Git Merge Conflict Resolution
+# 🛠️ Challenges and Troubleshooting
+
+## Git Merge Conflict Resolution
 
 A Git rebase conflict occurred during deployment workflow updates.
 
-- Resolution Process
-- identified conflicting files
-- manually resolved conflicts
-- completed Git rebase workflow
+### Resolution Process
+
+* identified conflicting files
+* manually resolved conflicts
+* completed Git rebase workflow
 
 This strengthened understanding of:
 
-- Git workflows
-source control conflict resolution
-deployment synchronization
-Reverse Proxy Troubleshooting
+* Git workflows
+* source control conflict resolution
+* deployment synchronization
 
-- Nginx configuration validation:
+---
 
-- sudo nginx -t
+## Reverse Proxy Troubleshooting
+
+Nginx configuration validation:
+
+```bash
+sudo nginx -t
+```
 
 Traffic flow testing:
 
-- curl http://localhost
+```bash
+curl http://localhost
 curl http://localhost:8080
-Security Validation
+```
 
-After removing public access to port 8080:
+---
 
-✅ public access through port 80 remained functional
+## Security Validation
 
-✅ direct access to port 8080 failed externally
+After removing public access to **port 8080**:
+
+✅ public access through **port 80** remained functional
+
+✅ direct access to **port 8080** failed externally
 
 This confirmed the reverse proxy architecture was functioning securely.
 
-## Lessons Learned
+---
+
+# 📚 Lessons Learned
 
 This project strengthened hands-on experience in:
 
-- Linux server administration
-- Docker containerization
-- Docker Compose orchestration
-- reverse proxy architecture
-- AWS networking and security groups
-- deployment automation
-- Git workflows
-- infrastructure troubleshooting
+* Linux server administration
+* Docker containerization
+* Docker Compose orchestration
+* reverse proxy architecture
+* AWS networking and security groups
+* deployment automation
+* Git workflows
+* infrastructure troubleshooting
 
-## Future Improvements
+---
+
+# 🔮 Future Improvements
 
 Potential future enhancements:
 
-- HTTPS with SSL/TLS certificates
-- automated CI/CD pipelines
-- centralized logging
-- monitoring and alerting
-- automated rollback workflows
+* HTTPS with SSL/TLS certificates
+* automated CI/CD pipelines
+* centralized logging
+* monitoring and alerting
+* automated rollback workflows
 
 ---
 
@@ -278,3 +376,21 @@ Potential future enhancements:
 <p align="center">
   <img src="images/screenshots/security-group.png" width="850">
 </p>
+
+---
+
+# ✅ Final Project Summary
+
+This project demonstrates practical hands-on experience deploying and managing containerized applications using:
+
+* **Docker**
+* **Docker Compose**
+* **Nginx**
+* **AWS EC2**
+* **Linux**
+
+
+
+
+
+
